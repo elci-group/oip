@@ -47,7 +47,7 @@ Ensure you have Rust installed and run:
 
 ```
 bash
-git clone https://github.com/yourusername/oip.git
+git clone https://github.com/elci-group/oip.git
 cd oip
 cargo build --release
 cargo install --path .

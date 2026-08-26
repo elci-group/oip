@@ -1,0 +1,7 @@
+/target/
+.kaptaind/
+.uni/
+.lwoodz/
+.env
+.idea/
+.vscode/

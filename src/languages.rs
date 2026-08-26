@@ -1,3 +1,5 @@
+// Copyright (c) 2026 elci-group
+// SPDX-License-Identifier: MIT
 // -----------------------------
 // src/languages.rs
 // -----------------------------
@@ -26,6 +28,29 @@ impl Language {
             }
         } else {
             Language::Other("txt".to_string())
+        }
+    }
+
+    pub fn name(&self) -> &str {
+        match self {
+            Language::Rust => "Rust",
+            Language::Python => "Python",
+            Language::Javascript => "JavaScript",
+            Language::Typescript => "TypeScript",
+            Language::Other(ext) => ext,
+        }
+    }
+
+    /// File extensions (without the leading dot) that a candidate target
+    /// file for this language may use, used by `infer_target_file` to
+    /// search the project for the file the clipboard content belongs to.
+    pub fn extensions(&self) -> &[&str] {
+        match self {
+            Language::Rust => &["rs"],
+            Language::Python => &["py"],
+            Language::Javascript => &["js"],
+            Language::Typescript => &["ts"],
+            Language::Other(_) => &[],
         }
     }
 }

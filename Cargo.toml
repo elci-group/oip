@@ -1,6 +1,6 @@
 [package]
 name = "oip"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Your Name <you@example.com>"]
 description = "Overwrite In Place - replaces a file with clipboard content for rapid prototyping"
@@ -9,4 +9,3 @@ license = "MIT"
 [dependencies]
 clap = { version = "4.3", features = ["derive"] }
 arboard = "3.6.1"
-regex = "1.12.2"

@@ -1,3 +1,4 @@
+mod curly_expand;
 // Copyright (c) 2026 elci-group
 // SPDX-License-Identifier: MIT
 // -----------------------------
@@ -32,7 +33,7 @@ fn original_path_for(backup: &Path) -> Option<PathBuf> {
     s.strip_suffix(BACKUP_SUFFIX).map(PathBuf::from)
 }
 
-#[derive(Parser)]
+#[derive(Clone, Parser)]
 #[command(
     name = "oip",
     version = "0.1.0",
@@ -54,6 +55,12 @@ struct Cli {
 
 fn main() -> ExitCode {
     let cli = Cli::parse();
+    let __curly_target: Vec<Option<String>> = match &cli.target { Some(v) => curly_expand::expand_or_literal(v.to_string_lossy().as_ref()).into_iter().map(Some).collect(), None => vec![None] };
+    let mut __curly_exit_code = std::process::ExitCode::SUCCESS;
+    for __curly_v_target in &__curly_target {
+        let mut cli = cli.clone();
+        cli.target = __curly_v_target.as_ref().map(|s| std::path::PathBuf::from(s.clone()));
+        __curly_exit_code = {
 
     let result = if cli.revert {
         revert_last_change()
@@ -72,6 +79,9 @@ fn main() -> ExitCode {
             ExitCode::FAILURE
         }
     }
+};
+    }
+    __curly_exit_code
 }
 
 /// Reads the clipboard and overwrites `target` with its text content. A
